@@ -1,0 +1,127 @@
+Shader "Unlit/FloorShaderHLSL"
+{
+    Properties
+    {
+        _Value("Movement Speed", Float) = 1.0
+        _Mode("Movement mode", Integer) = 1.0
+        _TileSize("Tile Quantity", Float) = 1.0
+        [HDR] _Color("Color A", Color) = (1, 1, 1, 1)
+        _MainTex ("Texture", 2D) = "white" {}
+    }
+
+    SubShader
+    {
+        Tags { "RenderType"="Opaque" }
+        LOD 100
+
+        Pass
+        {
+            CGPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+            // make fog work
+            #pragma multi_compile_fog
+
+            #include "UnityCG.cginc"
+
+#define mod(x, y) (x - y * floor(x / y))
+
+            struct appdata
+            {
+                float4 vertex : POSITION;
+                float2 uv : TEXCOORD0;
+            };
+
+            struct v2f
+            {
+                float2 uv : TEXCOORD0;
+                UNITY_FOG_COORDS(1)
+                float4 vertex : SV_POSITION;
+            };
+
+            sampler2D _MainTex;
+            float _Value;
+            float _TileSize;
+            float4 _MainTex_ST;
+            float4 _Color;
+            int _Mode;
+
+            v2f vert (appdata v)
+            {
+                v2f o;
+                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                UNITY_TRANSFER_FOG(o,o.vertex);
+                return o;
+            }
+
+            float Hash21(float2 p) 
+            {
+                p = frac(p * float2(123.234, 234.34));
+                p += dot(p, p + 213.42);
+                return frac(p.x * p.y);
+            }
+
+            float3 Cairo(float2 uv, float k) 
+            {
+                float2 id = floor(uv);
+                float check = mod(id.x + id.y, 2.0); // 0 or 1
+
+                uv = frac(uv) - 0.5;
+                float2 p = abs(uv);
+
+                if (check == 1.0)
+                    p = p.xy;
+
+                float a = (k * 0.5 + 0.5) * 3.1415;
+                float2 n = float2(sin(a), cos(a));
+                float d = dot(p - 0.5, n); // slanted line
+
+                if (d * (check - 0.5) < 0.0)
+                    id.x += sign(uv.x) * 0.5;
+                else
+                    id.y += sign(uv.y) * 0.5;
+
+                d = min(d, p.x);
+                d = max(d, -p.y);
+                d = abs(d);
+                d = min(d, dot(p - 0.5, float2(n.y, -n.x)));
+
+                return float3(id, d);
+            }
+
+            fixed4 frag(v2f i) : SV_Target
+            {
+                float2 uv = i.uv;
+                float2 mouse = 0;
+
+                float3 col = 0;
+                uv *= _TileSize;
+
+                float3 c;
+
+                if (_Mode == 0)
+                {
+                    c = Cairo(uv, abs(sin(_Value)));
+                }
+                else
+                {
+                    c = Cairo(uv, abs(sin(_Time.y * _Value / 10)));
+                }
+
+                col += c.z;
+
+                float r = Hash21(c.xy);
+
+                col *= 1. + abs(sin(r * 6.28315 + _Time.y / 10));
+
+                col += smoothstep(0.01, 0.0, c.z - 0.005);
+
+                return _Color * float4(col, 1.0);
+            }
+
+
+            ENDCG
+        }
+    }
+}
