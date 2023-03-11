@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    uint currentRoom;
+    [SerializeField]
+    RoomObject currentRoom;
+    public Torch torch;
     void Start()
     {
-        currentRoom = 3;
+        currentRoom.lightSources.Add(torch);
     }
 
     void Update()
@@ -15,12 +18,12 @@ public class Player : MonoBehaviour
         
     }
 
-    public void setRoom (uint p_room) 
+    public void setRoom (RoomObject p_room) 
     {
         currentRoom = p_room;
     }
 
-    public uint getRoom()
+    public RoomObject getRoom()
     {
         return currentRoom;
     }

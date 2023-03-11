@@ -1,12 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Rendering.VirtualTexturing;
+using Utilities;
 
 public class LightSource : MonoBehaviour
 {
     [SerializeField] protected float maxIntensity;
     [SerializeField] protected float speedDecreasingIntensity = 1f;
-    [SerializeField] protected float lightIntensity;
+    [SerializeField] protected float pointLightMaxIntensity;
+    protected float lightIntensity;
+
+    protected System.Action<InputAction.CallbackContext> lastCallback;
     public float LightIntensity
     {
         get { return lightIntensity; }
@@ -28,19 +35,26 @@ public class LightSource : MonoBehaviour
                     tempEmission.startColor.color.g, 
                     tempEmission.startColor.color.b, 
                     temp);
+                lightObj.intensity = pointLightMaxIntensity * temp;
             }
         }
     }
     private ParticleSystem particles;
+    private Light lightObj;
     public bool IsLit { get; private set; }
     protected int enemyInTrigger;
 
     protected virtual void Awake()
     {
         particles = GetComponentInChildren<ParticleSystem>();
+        particles.Stop();
+
+        lightObj = GetComponentInChildren<Light>();
+        lightObj.intensity = 0f;
+
         IsLit = false;
         lightIntensity = 0.0f;
-        Activate();
+        //Activate();
     }
 
     protected virtual void Update()
@@ -57,6 +71,14 @@ public class LightSource : MonoBehaviour
         IsLit = true;
         particles.Play();
         lightIntensity = maxIntensity;
+        lightObj.intensity = pointLightMaxIntensity;       
+        EventManager.Publish(GameEventType.LIGHT_LIT);
+        Debug.Log("LIGHT_LIT published");
+    }
+
+    protected virtual void Activate(InputAction.CallbackContext c)
+    {
+        Activate();
     }
 
     protected virtual void OnTriggerEnter(Collider other)
@@ -69,6 +91,12 @@ public class LightSource : MonoBehaviour
             // Enemy enemy = other.GetComponent<Enemy>();
             // enemy.Brain.CurrentState = enemy.Brain.SiphoningState;
         }
+
+        if (other.CompareTag("Player"))
+        {
+            lastCallback = InputHandler.Unsubscribe(KeyAction.INTERACT);
+            InputHandler.Subscribe(KeyAction.INTERACT, Activate);
+        }
     }
 
     protected virtual void OnTriggerExit(Collider other)
@@ -76,6 +104,12 @@ public class LightSource : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             enemyInTrigger--;
+        }
+
+        if (other.CompareTag("Player"))
+        {
+            InputHandler.Unsubscribe(KeyAction.INTERACT);
+            InputHandler.Subscribe(KeyAction.INTERACT, lastCallback);
         }
     }
 }

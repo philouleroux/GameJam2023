@@ -15,8 +15,9 @@ public class PlayerMouvement : MonoBehaviour
     private PlayerInputs playerInputs;
 
 
-    private void Start()
+    private void Awake()
     {
+        rb = GetComponent<Rigidbody>();
         playerInputs = new PlayerInputs();
         moveInput = playerInputs.Movement.Axis;
         moveInput.Enable();
@@ -27,11 +28,15 @@ public class PlayerMouvement : MonoBehaviour
         moveInput.Disable();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         Vector3 direction = moveInput.ReadValue<Vector2>().normalized;
         direction.z = direction.y;
         direction.y = 0f;
-        transform.position += direction * speed * Time.deltaTime;
+        //transform.position += direction * speed * Time.deltaTime;
+        //rb.AddForce(transform.position += direction * speed * Time.deltaTime);
+        //transform.RotateAround(transform.position, transform.up, Mathf.Asin(direction.x - transform.forward.x));
+        transform.LookAt(Vector3.Lerp(transform.forward, transform.position + direction * speed, 1f));
+        rb.velocity = direction * speed;
     }
 }

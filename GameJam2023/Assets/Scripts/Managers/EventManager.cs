@@ -6,7 +6,7 @@ namespace Utilities
 	public enum GameEventType
 	{
 		NONE = -1,
-		EVENT_NAME,
+		LIGHT_LIT,
 		START_GAME
 	}
 

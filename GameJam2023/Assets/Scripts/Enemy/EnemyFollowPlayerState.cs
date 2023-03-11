@@ -26,6 +26,5 @@ public class EnemyFollowPlayerState : EnemyBaseState
     public override void UpdateState(EnemyStateManager context)
     {
         navMeshAgent.SetDestination(playerTransform.position);
-
     }
 }

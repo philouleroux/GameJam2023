@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class Torch : LightSource
 {
+    [SerializeField]
     Slider slider;
-    [SerializeField] float lerpSpeed = 1f;
+
+    [SerializeField] 
+    float lerpSpeed = 1f;
 
     private float valueForSlider = 1f;
 
@@ -15,9 +19,15 @@ public class Torch : LightSource
 
     private void UpdateUI() => slider.value = Mathf.Lerp(slider.value, valueForSlider, lerpSpeed);
 
-
-    private void Update()
+    public void Start()
     {
+        base.Awake();
+        Activate();
+    }
+
+    protected override void Update()
+    {
+        base.Update();
         UpdateUI();
     }
 }
