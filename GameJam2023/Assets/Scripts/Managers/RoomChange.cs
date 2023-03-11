@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utilities;
 
 
 public class RoomChange : MonoBehaviour
@@ -31,7 +32,8 @@ public class RoomChange : MonoBehaviour
                 player.setRoom(newRoom);
                 if(!newRoom.lightSources.Contains(player.torch))
                 {
-                    newRoom.lightSources.Add(player.torch);  
+                    newRoom.lightSources.Add(player.torch);
+                    EventManager.Publish(GameEventType.LIGHT_LIT);
                 }
             }
         }

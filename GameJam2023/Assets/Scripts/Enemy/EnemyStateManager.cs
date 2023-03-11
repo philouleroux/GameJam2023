@@ -37,13 +37,14 @@ public class EnemyStateManager : MonoBehaviour
 
     private void Start()
     {
+        currentState = null;
         currentState = lurkAroundState;
         currentState.EnterState(this);
     }
 
     private void Update()
     {
-        Debug.Log(nameof(currentState));
+        //Debug.Log(nameof(currentState));
         currentState.UpdateState(this);
     }
 
