@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMouvement : MonoBehaviour
 {
-    [SerializeField] Rigidbody rigidbody;
+    [SerializeField] Rigidbody rb;
 
     [SerializeField] float speed = 10f;
 
@@ -32,6 +32,6 @@ public class PlayerMouvement : MonoBehaviour
         Vector3 direction = moveInput.ReadValue<Vector2>().normalized;
         direction.z = direction.y;
         direction.y = 0f;
-        rigidbody.velocity = direction * speed;
+        transform.position += direction * speed * Time.deltaTime;
     }
 }
