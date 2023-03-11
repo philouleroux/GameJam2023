@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Torch : LightSource
 {
-    Slider slider;
+    [SerializeField] Slider slider;
     [SerializeField] float lerpSpeed = 1f;
 
     private float valueForSlider = 1f;
@@ -16,8 +16,9 @@ public class Torch : LightSource
     private void UpdateUI() => slider.value = Mathf.Lerp(slider.value, valueForSlider, lerpSpeed);
 
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         UpdateUI();
     }
 }
