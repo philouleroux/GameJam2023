@@ -58,6 +58,28 @@ public static class InputHandler
         callbacks[key].action.performed += callbackMethod;
     }
 
+    public static void SubscribeToStart(KeyAction key, Action<InputAction.CallbackContext> callbackMethod)
+    {
+        if (callbacks[key].callback != null)
+        {
+            Unsubscribe(key);
+        }
+
+        callbacks[key].callback = callbackMethod;
+        callbacks[key].action.started += callbackMethod;
+    }
+
+    public static void SubscribeToCancel(KeyAction key, Action<InputAction.CallbackContext> callbackMethod)
+    {
+        if (callbacks[key].callback != null)
+        {
+            Unsubscribe(key);
+        }
+
+        callbacks[key].callback = callbackMethod;
+        callbacks[key].action.canceled += callbackMethod;
+    }
+
     public static Action<InputAction.CallbackContext> Unsubscribe(KeyAction key)
     {
         Action<InputAction.CallbackContext> callback = null;
