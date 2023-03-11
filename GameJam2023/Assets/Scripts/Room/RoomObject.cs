@@ -8,7 +8,7 @@ public class RoomObject : MonoBehaviour
     uint index;
 
     [SerializeField]
-    LightSource[]  lightSources = null;
+    public List<LightSource>  lightSources = new List<LightSource>();
 
     // Start is called before the first frame update
     void Start()
@@ -21,4 +21,6 @@ public class RoomObject : MonoBehaviour
     {
         
     }
+
+    
 }

@@ -6,9 +6,11 @@ using UnityEngine.AI;
 public class EnemyStateManager : MonoBehaviour
 {
     [SerializeField]
-    RoomObject currentRoom;
+    public RoomObject currentRoom;
 
     EnemyBaseState currentState;
+
+    
     public EnemyAttackLightState attackLightState { get; private set; }
     public EnemyFollowPlayerState followPlayerState { get; private set; }
     public EnemyLurkAroundState lurkAroundState { get; private set; }
