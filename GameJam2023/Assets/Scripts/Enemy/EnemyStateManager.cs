@@ -46,6 +46,6 @@ public class EnemyStateManager : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        
+        currentState.OnCollision(this, collision);
     }
 }
