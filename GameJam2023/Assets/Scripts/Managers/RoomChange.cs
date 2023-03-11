@@ -18,9 +18,7 @@ public class RoomChange : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
-        {
-
-            
+        {            
             if (player.getRoom() != newRoom)
             {
                 ///retire la toruch de la piece précédeante

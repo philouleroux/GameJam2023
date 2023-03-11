@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Utilities;
 
 public class EnemyStateManager : MonoBehaviour
 {
@@ -30,6 +31,8 @@ public class EnemyStateManager : MonoBehaviour
         followPlayerState = new EnemyFollowPlayerState(navMeshAgent, playerTransform);
         lurkAroundState = new EnemyLurkAroundState(navMeshAgent);
         goToLightState = new EnemyGoToLightState(navMeshAgent);
+        EventManager.Subscribe(GameEventType.LIGHT_LIT, ChangeToLurk);
+        
     }
 
     private void Start()
@@ -40,6 +43,7 @@ public class EnemyStateManager : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(nameof(currentState));
         currentState.UpdateState(this);
     }
 
@@ -52,5 +56,11 @@ public class EnemyStateManager : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         currentState.OnCollision(this, collision);
+    }
+
+    private void ChangeToLurk()
+    {
+        Start();
+        Debug.Log("LIGHT_LIT consummed");
     }
 }

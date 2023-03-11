@@ -1,6 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Rendering.VirtualTexturing;
+using Utilities;
 
 public class LightSource : MonoBehaviour
 {
@@ -8,6 +12,8 @@ public class LightSource : MonoBehaviour
     [SerializeField] protected float speedDecreasingIntensity = 1f;
     [SerializeField] protected float pointLightMaxIntensity;
     protected float lightIntensity;
+
+    protected System.Action<InputAction.CallbackContext> lastCallback;
     public float LightIntensity
     {
         get { return lightIntensity; }
@@ -65,7 +71,14 @@ public class LightSource : MonoBehaviour
         IsLit = true;
         particles.Play();
         lightIntensity = maxIntensity;
-        lightObj.intensity = pointLightMaxIntensity;
+        lightObj.intensity = pointLightMaxIntensity;       
+        EventManager.Publish(GameEventType.LIGHT_LIT);
+        Debug.Log("LIGHT_LIT published");
+    }
+
+    protected virtual void Activate(InputAction.CallbackContext c)
+    {
+        Activate();
     }
 
     protected virtual void OnTriggerEnter(Collider other)
@@ -78,6 +91,12 @@ public class LightSource : MonoBehaviour
             // Enemy enemy = other.GetComponent<Enemy>();
             // enemy.Brain.CurrentState = enemy.Brain.SiphoningState;
         }
+
+        if (other.CompareTag("Player"))
+        {
+            lastCallback = InputHandler.Unsubscribe(KeyAction.INTERACT);
+            InputHandler.Subscribe(KeyAction.INTERACT, Activate);
+        }
     }
 
     protected virtual void OnTriggerExit(Collider other)
@@ -85,6 +104,12 @@ public class LightSource : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             enemyInTrigger--;
+        }
+
+        if (other.CompareTag("Player"))
+        {
+            InputHandler.Unsubscribe(KeyAction.INTERACT);
+            InputHandler.Subscribe(KeyAction.INTERACT, lastCallback);
         }
     }
 }
