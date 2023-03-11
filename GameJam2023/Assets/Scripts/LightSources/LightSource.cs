@@ -5,6 +5,7 @@ using UnityEngine;
 public class LightSource : MonoBehaviour
 {
     [SerializeField] private float maxIntensity;
+    [SerializeField] private float pointLightMaxIntensity;
     private float lightIntensity;
     public float LightIntensity
     {
@@ -27,18 +28,26 @@ public class LightSource : MonoBehaviour
                     tempEmission.startColor.color.g, 
                     tempEmission.startColor.color.b, 
                     temp);
+                lightObj.intensity = pointLightMaxIntensity * temp;
             }
         }
     }
     private ParticleSystem particles;
+    private Light lightObj;
     public bool IsLit { get; private set; }
     protected int enemyInTrigger;
 
     protected virtual void Awake()
     {
         particles = GetComponentInChildren<ParticleSystem>();
+        particles.Stop();
+
+        lightObj = GetComponentInChildren<Light>();
+        lightObj.intensity = 0f;
+
         IsLit = false;
         lightIntensity = 0.0f;
+
         Activate();
     }
 
@@ -56,6 +65,7 @@ public class LightSource : MonoBehaviour
         IsLit = true;
         particles.Play();
         lightIntensity = maxIntensity;
+        lightObj.intensity = pointLightMaxIntensity;
     }
 
     protected virtual void OnTriggerEnter(Collider other)
