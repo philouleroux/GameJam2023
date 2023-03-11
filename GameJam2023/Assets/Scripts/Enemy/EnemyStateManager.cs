@@ -5,6 +5,9 @@ using UnityEngine.AI;
 
 public class EnemyStateManager : MonoBehaviour
 {
+    [SerializeField]
+    RoomObject currentRoom;
+
     EnemyBaseState currentState;
     public EnemyAttackLightState attackLightState { get; private set; }
     public EnemyFollowPlayerState followPlayerState { get; private set; }
@@ -29,7 +32,7 @@ public class EnemyStateManager : MonoBehaviour
 
     private void Start()
     {
-        currentState = goToLightState;
+        currentState = lurkAroundState;
         currentState.EnterState(this);
     }
 

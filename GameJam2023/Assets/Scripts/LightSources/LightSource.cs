@@ -40,7 +40,7 @@ public class LightSource : MonoBehaviour
         particles = GetComponentInChildren<ParticleSystem>();
         IsLit = false;
         lightIntensity = 0.0f;
-        Activate();
+        //Activate();
     }
 
     protected virtual void Update()

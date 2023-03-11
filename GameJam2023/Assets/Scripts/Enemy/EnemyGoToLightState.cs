@@ -27,6 +27,6 @@ public class EnemyGoToLightState : EnemyBaseState
 
     public override void UpdateState(EnemyStateManager context)
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 }
