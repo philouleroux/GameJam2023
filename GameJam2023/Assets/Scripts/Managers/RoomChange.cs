@@ -15,11 +15,15 @@ public class RoomChange : MonoBehaviour
         player = GameObject.FindWithTag("Player");
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.collider.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            player.GetComponent<Player>().setRoom(newRoom);
+            if (player.GetComponent<Player>().getRoom() != newRoom)
+            {
+                player.GetComponent<Player>().setRoom(newRoom);
+                Debug.Log("newRoom: " + newRoom.ToString());
+            }
         }
     }
 }

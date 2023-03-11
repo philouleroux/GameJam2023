@@ -19,4 +19,9 @@ public class Player : MonoBehaviour
     {
         currentRoom = p_room;
     }
+
+    public uint getRoom()
+    {
+        return currentRoom;
+    }
 }
