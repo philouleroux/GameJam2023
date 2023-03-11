@@ -16,42 +16,57 @@ public class LightSource : MonoBehaviour
             if(lightIntensity <= 0.0f)
             {
                 IsLit = false;
+                particles.Stop();
+            }
+            else
+            {
+                float temp = lightIntensity / maxIntensity;
+                var tempEmission = particles.main;
+                tempEmission.startColor = new Color(
+                    tempEmission.startColor.color.r, 
+                    tempEmission.startColor.color.g, 
+                    tempEmission.startColor.color.b, 
+                    temp);
             }
         }
     }
     private ParticleSystem particles;
     public bool IsLit { get; private set; }
-    private int enemyInTrigger;
+    protected int enemyInTrigger;
 
     protected virtual void Awake()
     {
-        particles = GetComponent<ParticleSystem>();
+        particles = GetComponentInChildren<ParticleSystem>();
         IsLit = false;
         lightIntensity = 0.0f;
+        Activate();
     }
 
     protected virtual void Update()
     {
         if (enemyInTrigger > 0 && IsLit)
         {
-            LightIntensity -= 1.0f * (float)enemyInTrigger * Time.deltaTime;
+            LightIntensity -= (enemyInTrigger * Time.deltaTime);
+            Debug.Log($"Light intensity = {LightIntensity}");
         }
     }
 
     protected virtual void Activate()
     {
-        if (!IsLit)
-        {
-            IsLit = true;
-            particles.Play();
-        }
+        IsLit = true;
+        particles.Play();
+        lightIntensity = maxIntensity;
     }
 
     protected virtual void OnTriggerEnter(Collider other)
     {
+        Debug.Log($"Trigger");
         if (other.CompareTag("Enemy"))
         {
             enemyInTrigger++;
+            Debug.Log($"Tag compared");
+            // Enemy enemy = other.GetComponent<Enemy>();
+            // enemy.Brain.CurrentState = enemy.Brain.SiphoningState;
         }
     }
 
