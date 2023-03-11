@@ -6,7 +6,8 @@ public class LightSource : MonoBehaviour
 {
     [SerializeField] protected float maxIntensity;
     [SerializeField] protected float speedDecreasingIntensity = 1f;
-    [SerializeField] protected float lightIntensity;
+    [SerializeField] protected float pointLightMaxIntensity;
+    protected float lightIntensity;
     public float LightIntensity
     {
         get { return lightIntensity; }
