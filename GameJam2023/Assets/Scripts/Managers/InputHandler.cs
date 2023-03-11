@@ -5,11 +5,9 @@ using UnityEngine;
 
 public enum KeyAction
 {
-    LEFT_CLICK,
-    MOVE,
-    MOVE_P2,
+    AXIS,
     INTERACT,
-    INTERACT_P2,
+    LEFT_CLICK,
 
     COUNT
 }
@@ -41,14 +39,12 @@ public static class InputHandler
 
     private static void BuildDictionary()
     {
-        callbacks.Add(KeyAction.MOVE,
+        callbacks.Add(KeyAction.AXIS,
             new InputActionPair(playerInputs.Movement.Axis, null));
-        callbacks.Add(KeyAction.MOVE_P2,
-            new InputActionPair(playerInputs.Movement_P2.Axis, null));
         callbacks.Add(KeyAction.INTERACT,
             new InputActionPair(playerInputs.Interactions.Interact, null));
-        callbacks.Add(KeyAction.INTERACT_P2,
-            new InputActionPair(playerInputs.Interactions_P2.Interact, null));
+        callbacks.Add(KeyAction.LEFT_CLICK,
+            new InputActionPair(playerInputs.Spells.Block, null));
     }
 
     public static void Subscribe(KeyAction key, Action<InputAction.CallbackContext> callbackMethod)

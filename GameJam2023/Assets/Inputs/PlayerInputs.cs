@@ -92,27 +92,10 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""action"": ""Axis"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                }
-            ]
-        },
-        {
-            ""name"": ""Movement_P2"",
-            ""id"": ""d61046aa-d761-4475-8d6e-65520bd0bf5c"",
-            ""actions"": [
-                {
-                    ""name"": ""Axis"",
-                    ""type"": ""Value"",
-                    ""id"": ""5330962d-d257-4c06-ad93-e8099f4fd252"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                }
-            ],
-            ""bindings"": [
+                },
                 {
                     ""name"": ""2D Vector"",
-                    ""id"": ""693f2d8f-7ad3-4608-ba84-66329e833e72"",
+                    ""id"": ""e34689e5-4a7a-4c15-98c1-73c689aed1b3"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -123,7 +106,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""up"",
-                    ""id"": ""5bb4ee87-49e9-418a-b7d4-08fb466584d8"",
+                    ""id"": ""cef90f3c-3a1c-4c9b-86eb-b107f3f78dd6"",
                     ""path"": ""<Gamepad>/leftStick/up"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -134,7 +117,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""down"",
-                    ""id"": ""00df5b91-c0cd-4f32-949d-ab35f3edf194"",
+                    ""id"": ""ff30822c-effc-4083-824b-055b22c16294"",
                     ""path"": ""<Gamepad>/leftStick/down"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -145,7 +128,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""left"",
-                    ""id"": ""a15848bc-1734-4e2b-b8ed-e7146b323ddf"",
+                    ""id"": ""a1947e92-362b-4763-be77-f0e3f72db0de"",
                     ""path"": ""<Gamepad>/leftStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -156,7 +139,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""right"",
-                    ""id"": ""92fcff3a-5e02-4ee6-b326-f92841c06bae"",
+                    ""id"": ""fc33fe7d-9ef5-434f-a088-8f615a261f03"",
                     ""path"": ""<Gamepad>/leftStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -192,17 +175,28 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e9b95757-49f8-44b7-a559-42d2ce1c8897"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
         {
-            ""name"": ""Interactions_P2"",
-            ""id"": ""b03eab90-2d39-49a5-b162-7845a73e30f7"",
+            ""name"": ""Spells"",
+            ""id"": ""4551003b-dd36-4223-a5a3-cfb6ff3aebfc"",
             ""actions"": [
                 {
-                    ""name"": ""Interact"",
+                    ""name"": ""Block"",
                     ""type"": ""Button"",
-                    ""id"": ""d4ef7b05-3dac-4615-a365-3195d861a4ce"",
+                    ""id"": ""a1f35cc9-a573-4fa8-b7b6-3177161b932d"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -212,12 +206,23 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""c346e713-8422-4481-b155-290a73b08fee"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""id"": ""d4487227-269b-492d-83fb-7139c9310fe3"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Interact"",
+                    ""action"": ""Block"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""773fc165-5940-4372-bcaf-56369b1355ec"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Block"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -229,15 +234,12 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         // Movement
         m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
         m_Movement_Axis = m_Movement.FindAction("Axis", throwIfNotFound: true);
-        // Movement_P2
-        m_Movement_P2 = asset.FindActionMap("Movement_P2", throwIfNotFound: true);
-        m_Movement_P2_Axis = m_Movement_P2.FindAction("Axis", throwIfNotFound: true);
         // Interactions
         m_Interactions = asset.FindActionMap("Interactions", throwIfNotFound: true);
         m_Interactions_Interact = m_Interactions.FindAction("Interact", throwIfNotFound: true);
-        // Interactions_P2
-        m_Interactions_P2 = asset.FindActionMap("Interactions_P2", throwIfNotFound: true);
-        m_Interactions_P2_Interact = m_Interactions_P2.FindAction("Interact", throwIfNotFound: true);
+        // Spells
+        m_Spells = asset.FindActionMap("Spells", throwIfNotFound: true);
+        m_Spells_Block = m_Spells.FindAction("Block", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -327,39 +329,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
     }
     public MovementActions @Movement => new MovementActions(this);
 
-    // Movement_P2
-    private readonly InputActionMap m_Movement_P2;
-    private IMovement_P2Actions m_Movement_P2ActionsCallbackInterface;
-    private readonly InputAction m_Movement_P2_Axis;
-    public struct Movement_P2Actions
-    {
-        private @PlayerInputs m_Wrapper;
-        public Movement_P2Actions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Axis => m_Wrapper.m_Movement_P2_Axis;
-        public InputActionMap Get() { return m_Wrapper.m_Movement_P2; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(Movement_P2Actions set) { return set.Get(); }
-        public void SetCallbacks(IMovement_P2Actions instance)
-        {
-            if (m_Wrapper.m_Movement_P2ActionsCallbackInterface != null)
-            {
-                @Axis.started -= m_Wrapper.m_Movement_P2ActionsCallbackInterface.OnAxis;
-                @Axis.performed -= m_Wrapper.m_Movement_P2ActionsCallbackInterface.OnAxis;
-                @Axis.canceled -= m_Wrapper.m_Movement_P2ActionsCallbackInterface.OnAxis;
-            }
-            m_Wrapper.m_Movement_P2ActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @Axis.started += instance.OnAxis;
-                @Axis.performed += instance.OnAxis;
-                @Axis.canceled += instance.OnAxis;
-            }
-        }
-    }
-    public Movement_P2Actions @Movement_P2 => new Movement_P2Actions(this);
-
     // Interactions
     private readonly InputActionMap m_Interactions;
     private IInteractionsActions m_InteractionsActionsCallbackInterface;
@@ -393,43 +362,39 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
     }
     public InteractionsActions @Interactions => new InteractionsActions(this);
 
-    // Interactions_P2
-    private readonly InputActionMap m_Interactions_P2;
-    private IInteractions_P2Actions m_Interactions_P2ActionsCallbackInterface;
-    private readonly InputAction m_Interactions_P2_Interact;
-    public struct Interactions_P2Actions
+    // Spells
+    private readonly InputActionMap m_Spells;
+    private ISpellsActions m_SpellsActionsCallbackInterface;
+    private readonly InputAction m_Spells_Block;
+    public struct SpellsActions
     {
         private @PlayerInputs m_Wrapper;
-        public Interactions_P2Actions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Interact => m_Wrapper.m_Interactions_P2_Interact;
-        public InputActionMap Get() { return m_Wrapper.m_Interactions_P2; }
+        public SpellsActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Block => m_Wrapper.m_Spells_Block;
+        public InputActionMap Get() { return m_Wrapper.m_Spells; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(Interactions_P2Actions set) { return set.Get(); }
-        public void SetCallbacks(IInteractions_P2Actions instance)
+        public static implicit operator InputActionMap(SpellsActions set) { return set.Get(); }
+        public void SetCallbacks(ISpellsActions instance)
         {
-            if (m_Wrapper.m_Interactions_P2ActionsCallbackInterface != null)
+            if (m_Wrapper.m_SpellsActionsCallbackInterface != null)
             {
-                @Interact.started -= m_Wrapper.m_Interactions_P2ActionsCallbackInterface.OnInteract;
-                @Interact.performed -= m_Wrapper.m_Interactions_P2ActionsCallbackInterface.OnInteract;
-                @Interact.canceled -= m_Wrapper.m_Interactions_P2ActionsCallbackInterface.OnInteract;
+                @Block.started -= m_Wrapper.m_SpellsActionsCallbackInterface.OnBlock;
+                @Block.performed -= m_Wrapper.m_SpellsActionsCallbackInterface.OnBlock;
+                @Block.canceled -= m_Wrapper.m_SpellsActionsCallbackInterface.OnBlock;
             }
-            m_Wrapper.m_Interactions_P2ActionsCallbackInterface = instance;
+            m_Wrapper.m_SpellsActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Interact.started += instance.OnInteract;
-                @Interact.performed += instance.OnInteract;
-                @Interact.canceled += instance.OnInteract;
+                @Block.started += instance.OnBlock;
+                @Block.performed += instance.OnBlock;
+                @Block.canceled += instance.OnBlock;
             }
         }
     }
-    public Interactions_P2Actions @Interactions_P2 => new Interactions_P2Actions(this);
+    public SpellsActions @Spells => new SpellsActions(this);
     public interface IMovementActions
-    {
-        void OnAxis(InputAction.CallbackContext context);
-    }
-    public interface IMovement_P2Actions
     {
         void OnAxis(InputAction.CallbackContext context);
     }
@@ -437,8 +402,8 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
     {
         void OnInteract(InputAction.CallbackContext context);
     }
-    public interface IInteractions_P2Actions
+    public interface ISpellsActions
     {
-        void OnInteract(InputAction.CallbackContext context);
+        void OnBlock(InputAction.CallbackContext context);
     }
 }
