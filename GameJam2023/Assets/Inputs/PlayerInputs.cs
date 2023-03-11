@@ -22,9 +22,224 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
     {
         asset = InputActionAsset.FromJson(@"{
     ""name"": ""PlayerInputs"",
-    ""maps"": [],
+    ""maps"": [
+        {
+            ""name"": ""Movement"",
+            ""id"": ""88dd793f-ebf2-429e-b4cf-303b4e1a6546"",
+            ""actions"": [
+                {
+                    ""name"": ""Axis"",
+                    ""type"": ""Value"",
+                    ""id"": ""94649b09-ba03-4d70-95a6-c137136465d1"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""bf5f5227-36c0-43e2-9936-da9ae7a1a429"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Axis"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""3bb379ca-043f-4fbe-9132-737ac2736783"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Axis"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""4a969125-085f-43df-81f7-33ab49bb587a"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Axis"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""76552023-c323-4af5-9076-8fb29fe97c84"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Axis"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""b10ad257-2e2a-4020-93bc-d8c8b3673b43"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Axis"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""e34689e5-4a7a-4c15-98c1-73c689aed1b3"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Axis"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""cef90f3c-3a1c-4c9b-86eb-b107f3f78dd6"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Axis"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""ff30822c-effc-4083-824b-055b22c16294"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Axis"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""a1947e92-362b-4763-be77-f0e3f72db0de"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Axis"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""fc33fe7d-9ef5-434f-a088-8f615a261f03"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Axis"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
+        },
+        {
+            ""name"": ""Interactions"",
+            ""id"": ""bb165186-238d-4413-a3c9-c445254df473"",
+            ""actions"": [
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""7ac1e20e-4b94-491a-9f0c-dd63f5524dfa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""2d9cdf51-8a56-40df-b46e-54d671fff0e1"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e9b95757-49f8-44b7-a559-42d2ce1c8897"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Spells"",
+            ""id"": ""4551003b-dd36-4223-a5a3-cfb6ff3aebfc"",
+            ""actions"": [
+                {
+                    ""name"": ""Block"",
+                    ""type"": ""Button"",
+                    ""id"": ""a1f35cc9-a573-4fa8-b7b6-3177161b932d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""d4487227-269b-492d-83fb-7139c9310fe3"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Block"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""773fc165-5940-4372-bcaf-56369b1355ec"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Block"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        }
+    ],
     ""controlSchemes"": []
 }");
+        // Movement
+        m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
+        m_Movement_Axis = m_Movement.FindAction("Axis", throwIfNotFound: true);
+        // Interactions
+        m_Interactions = asset.FindActionMap("Interactions", throwIfNotFound: true);
+        m_Interactions_Interact = m_Interactions.FindAction("Interact", throwIfNotFound: true);
+        // Spells
+        m_Spells = asset.FindActionMap("Spells", throwIfNotFound: true);
+        m_Spells_Block = m_Spells.FindAction("Block", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -79,5 +294,116 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
     public int FindBinding(InputBinding bindingMask, out InputAction action)
     {
         return asset.FindBinding(bindingMask, out action);
+    }
+
+    // Movement
+    private readonly InputActionMap m_Movement;
+    private IMovementActions m_MovementActionsCallbackInterface;
+    private readonly InputAction m_Movement_Axis;
+    public struct MovementActions
+    {
+        private @PlayerInputs m_Wrapper;
+        public MovementActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Axis => m_Wrapper.m_Movement_Axis;
+        public InputActionMap Get() { return m_Wrapper.m_Movement; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MovementActions set) { return set.Get(); }
+        public void SetCallbacks(IMovementActions instance)
+        {
+            if (m_Wrapper.m_MovementActionsCallbackInterface != null)
+            {
+                @Axis.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnAxis;
+                @Axis.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnAxis;
+                @Axis.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnAxis;
+            }
+            m_Wrapper.m_MovementActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Axis.started += instance.OnAxis;
+                @Axis.performed += instance.OnAxis;
+                @Axis.canceled += instance.OnAxis;
+            }
+        }
+    }
+    public MovementActions @Movement => new MovementActions(this);
+
+    // Interactions
+    private readonly InputActionMap m_Interactions;
+    private IInteractionsActions m_InteractionsActionsCallbackInterface;
+    private readonly InputAction m_Interactions_Interact;
+    public struct InteractionsActions
+    {
+        private @PlayerInputs m_Wrapper;
+        public InteractionsActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Interact => m_Wrapper.m_Interactions_Interact;
+        public InputActionMap Get() { return m_Wrapper.m_Interactions; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(InteractionsActions set) { return set.Get(); }
+        public void SetCallbacks(IInteractionsActions instance)
+        {
+            if (m_Wrapper.m_InteractionsActionsCallbackInterface != null)
+            {
+                @Interact.started -= m_Wrapper.m_InteractionsActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_InteractionsActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_InteractionsActionsCallbackInterface.OnInteract;
+            }
+            m_Wrapper.m_InteractionsActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
+            }
+        }
+    }
+    public InteractionsActions @Interactions => new InteractionsActions(this);
+
+    // Spells
+    private readonly InputActionMap m_Spells;
+    private ISpellsActions m_SpellsActionsCallbackInterface;
+    private readonly InputAction m_Spells_Block;
+    public struct SpellsActions
+    {
+        private @PlayerInputs m_Wrapper;
+        public SpellsActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Block => m_Wrapper.m_Spells_Block;
+        public InputActionMap Get() { return m_Wrapper.m_Spells; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(SpellsActions set) { return set.Get(); }
+        public void SetCallbacks(ISpellsActions instance)
+        {
+            if (m_Wrapper.m_SpellsActionsCallbackInterface != null)
+            {
+                @Block.started -= m_Wrapper.m_SpellsActionsCallbackInterface.OnBlock;
+                @Block.performed -= m_Wrapper.m_SpellsActionsCallbackInterface.OnBlock;
+                @Block.canceled -= m_Wrapper.m_SpellsActionsCallbackInterface.OnBlock;
+            }
+            m_Wrapper.m_SpellsActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Block.started += instance.OnBlock;
+                @Block.performed += instance.OnBlock;
+                @Block.canceled += instance.OnBlock;
+            }
+        }
+    }
+    public SpellsActions @Spells => new SpellsActions(this);
+    public interface IMovementActions
+    {
+        void OnAxis(InputAction.CallbackContext context);
+    }
+    public interface IInteractionsActions
+    {
+        void OnInteract(InputAction.CallbackContext context);
+    }
+    public interface ISpellsActions
+    {
+        void OnBlock(InputAction.CallbackContext context);
     }
 }

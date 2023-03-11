@@ -6,7 +6,8 @@ namespace Utilities
 	public enum GameEventType
 	{
 		NONE = -1,
-		EVENT_NAME
+		EVENT_NAME,
+		START_GAME
 	}
 
 	public static class EventManager
