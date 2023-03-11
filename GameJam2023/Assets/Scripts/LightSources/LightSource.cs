@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class LightSource : MonoBehaviour
 {
-    [SerializeField] private float maxIntensity;
-    private float lightIntensity;
+    [SerializeField] protected float maxIntensity;
+    [SerializeField] protected float speedDecreasingIntensity = 1f;
+    [SerializeField] protected float lightIntensity;
     public float LightIntensity
     {
         get { return lightIntensity; }
@@ -46,7 +47,7 @@ public class LightSource : MonoBehaviour
     {
         if (enemyInTrigger > 0 && IsLit)
         {
-            LightIntensity -= (enemyInTrigger * Time.deltaTime);
+            LightIntensity -= (enemyInTrigger * speedDecreasingIntensity* Time.deltaTime);
             Debug.Log($"Light intensity = {LightIntensity}");
         }
     }
