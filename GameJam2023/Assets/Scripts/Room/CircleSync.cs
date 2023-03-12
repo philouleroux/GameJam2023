@@ -11,7 +11,7 @@ public class CircleSync : MonoBehaviour
     public Camera Camera;
     public LayerMask LayerMask;
 
-    void Update()
+    void FixedUpdate()
     {
         var dir = (Camera.transform.position - transform.position).normalized;
         var ray = new Ray(transform.position, dir);
