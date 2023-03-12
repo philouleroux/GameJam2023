@@ -8,8 +8,13 @@ public class CircleSync : MonoBehaviour
     public static int SizeID = Shader.PropertyToID("_Size");
 
     public Material WallMaterial;
-    public Camera Camera;
+    private Camera Camera;
     public LayerMask LayerMask;
+
+    private void Awake()
+    {
+        Camera = Camera.main;
+    }
 
     void FixedUpdate()
     {

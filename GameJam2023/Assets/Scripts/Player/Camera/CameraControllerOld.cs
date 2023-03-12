@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraControllerOld : MonoBehaviour
 {
-    private Camera camera;
+    private Camera cam;
 
     [SerializeField] private Transform[] points;
 
@@ -19,7 +19,7 @@ public class CameraControllerOld : MonoBehaviour
 
     private void Awake()
     {
-        camera = Camera.main;
+        cam = Camera.main;
     }
 
     private void Update()
@@ -43,7 +43,7 @@ public class CameraControllerOld : MonoBehaviour
         }
 
         //camera.transform.localPosition = Vector3.Lerp(positionToMoveTowards, GetPointBetweenPlayers(), lerpSpeedBetweenPlayers * Time.deltaTime);
-        camera.transform.localPosition = Vector3.Lerp(camera.transform.localPosition, positionToMoveTowards, lerpSpeedGoingBackwards * Time.deltaTime);
+        cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, positionToMoveTowards, lerpSpeedGoingBackwards * Time.deltaTime);
         
     }
 
