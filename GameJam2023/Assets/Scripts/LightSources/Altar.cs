@@ -39,6 +39,8 @@ public class Altar : LightSource
             }
             else if (lightIntensity >= maxIntensity)
             {
+                GameManager.instance.Player.Animator.ResetTrigger("Prayer");
+                GameManager.instance.Player.Animator.SetTrigger("Idle");
                 godBeamParticles.Play();
             }
         }
@@ -66,30 +68,34 @@ public class Altar : LightSource
         base.Update();
     }
 
-    protected override void Activate()
+    protected override void Activate(string animType)
     {
-        IsLit = true;
-        foreach (ParticleSystem ps in candlesParticles)
+        if (animType == "LightBrazier")
         {
-            ps.Play();
+            IsLit = true;
+            foreach (ParticleSystem ps in candlesParticles)
+            {
+                ps.Play();
+            }
+
+            EventManager.Publish(GameEventType.LIGHT_LIT);
         }
 
-        EventManager.Publish(GameEventType.LIGHT_LIT);
+        if (animType == "Prayer")
+        {
+            LightIntensity += maxIntensity * 0.5f;
+            lightObj.intensity = pointLightMaxIntensity;
+        }
     }
 
     protected override void Activate(InputAction.CallbackContext c)
     {
-        Activate();
+        SetFire();
     }
 
     private void Pray(InputAction.CallbackContext c)
     {
-        //GameManager.instance.Player.Animator.SetTrigger("Pray");
-
-        // Change this
-
-        LightIntensity = maxIntensity;
-        lightObj.intensity = pointLightMaxIntensity;
+        GameManager.instance.Player.Animator.SetTrigger("Kneeling");
     }
 
     protected override void OnTriggerEnter(Collider other)
@@ -101,10 +107,12 @@ public class Altar : LightSource
             if (!IsLit && other.GetComponent<Player>().HasTorch)
             {
                 InputHandler.Unsubscribe(KeyAction.INTERACT);
+                EventManager<string>.SubscribeParam(GameEventType.ANIM_OVER, Activate);
                 InputHandler.Subscribe(KeyAction.INTERACT, Activate);
             }
             else if (IsLit && !other.GetComponent<Player>().HasTorch)
             {
+                EventManager<string>.SubscribeParam(GameEventType.ANIM_OVER, Activate);
                 InputHandler.Unsubscribe(KeyAction.INTERACT);
                 InputHandler.Subscribe(KeyAction.INTERACT, Pray);
             }
@@ -117,6 +125,7 @@ public class Altar : LightSource
 
         if (other.CompareTag("Player"))
         {
+            EventManager<string>.UnsubscribeParam(GameEventType.ANIM_OVER, Activate);
             InputHandler.Unsubscribe(KeyAction.INTERACT);
         }
     }
