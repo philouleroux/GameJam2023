@@ -8,8 +8,12 @@ public class Player : MonoBehaviour
     [SerializeField]
     RoomObject currentRoom;
     public Torch torch;
+    public bool HasTorch { get; set; }  
+
     void Start()
     {
+        GameManager.instance.Player = this;
+        HasTorch = true;
         currentRoom.lightSources.Add(torch);
     }
 

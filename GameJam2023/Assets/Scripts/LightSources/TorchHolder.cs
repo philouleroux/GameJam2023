@@ -30,18 +30,25 @@ public class TorchHolder : MonoBehaviour
     {
         isHolding = !isHolding;
 
-        if (isHolding)
+        if (isHolding && GameManager.instance.Player.HasTorch)
         {
+            GameManager.instance.Player.HasTorch = false;
+            GameManager.instance.Player.torch.gameObject.SetActive(false);
             holdingTorch.gameObject.SetActive(true);
             noTorch.gameObject.SetActive(false);
         }
         else
         {
+            GameManager.instance.Player.HasTorch = true;
+            GameManager.instance.Player.torch.gameObject.SetActive(value: true);
             holdingTorch.gameObject.SetActive(false);
             noTorch.gameObject.SetActive(true);
         }
         InputHandler.Unsubscribe(KeyAction.INTERACT);
-        InputHandler.Subscribe(KeyAction.INTERACT, lastCallback);
+        if (lastCallback != null)
+        {
+            InputHandler.Subscribe(KeyAction.INTERACT, lastCallback);
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -63,7 +70,10 @@ public class TorchHolder : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             InputHandler.Unsubscribe(KeyAction.INTERACT);
-            InputHandler.Subscribe(KeyAction.INTERACT, lastCallback);
+            if (lastCallback != null)
+            {
+                InputHandler.Subscribe(KeyAction.INTERACT, lastCallback);
+            }
         }
     }
 }
