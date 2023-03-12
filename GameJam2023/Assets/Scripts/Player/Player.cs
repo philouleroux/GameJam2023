@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     public Torch torch;
     public bool HasTorch { get; set; }  
 
-    void OnEnable()
+    void Start()
     {
         GameManager.instance.Player = this;
         HasTorch = true;

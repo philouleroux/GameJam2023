@@ -83,7 +83,15 @@ public class EnemyLurkAroundState : EnemyBaseState
                 {
                     isChassingTorch = true;
                 }
+                else
+                {
+                    isChassingTorch = false;
+                }
             }
+        }
+        else
+        {
+            isChassingTorch = false;
         }
     }
 

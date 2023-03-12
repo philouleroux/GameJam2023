@@ -10,7 +10,7 @@ public class EnemyGoToLightState : EnemyBaseState
 
     public override void EnterState(EnemyStateManager context)
     {
-        navMeshAgent.SetDestination(context.transformLight.position);
+        //navMeshAgent.SetDestination(context.transformLight.position);
     }
 
     public override void OnCollision(EnemyStateManager context, Collision collision)
