@@ -11,7 +11,7 @@ public class EnemyStateManager : MonoBehaviour
 
     EnemyBaseState currentState;
 
-    
+    public Animator anim;
     public EnemyAttackLightState attackLightState { get; private set; }
     public EnemyFollowPlayerState followPlayerState { get; private set; }
     public EnemyLurkAroundState lurkAroundState { get; private set; }
@@ -25,6 +25,7 @@ public class EnemyStateManager : MonoBehaviour
 
     private void Awake()
     {
+        anim = GetComponentInChildren<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
 
         attackLightState = new EnemyAttackLightState(navMeshAgent);
@@ -59,6 +60,7 @@ public class EnemyStateManager : MonoBehaviour
     public void SwitchState(EnemyBaseState newState)
     {
         currentState = newState;
+        anim.SetTrigger("lurkAroundState");
         currentState.EnterState(this);
     }
 
