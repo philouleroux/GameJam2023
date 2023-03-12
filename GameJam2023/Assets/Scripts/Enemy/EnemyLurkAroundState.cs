@@ -1,4 +1,3 @@
-using UnityEditor.TextCore.Text;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem.EnhancedTouch;
@@ -17,15 +16,17 @@ public class EnemyLurkAroundState : EnemyBaseState
         }
     }
 
-    lightStruc lBraziere = new lightStruc(false, null);
+    lightStruc lBrazier = new lightStruc(false, null);
     lightStruc lAltar = new lightStruc(false, null);
     lightStruc lTorch = new lightStruc(false, null);
 
-    bool isChassingTorch = false;
+    bool isChasingTorch = false;
+
     public EnemyLurkAroundState(NavMeshAgent navMeshAgent)
     {
         base.navMeshAgent = navMeshAgent;
     }
+
     public override void EnterState(EnemyStateManager context)
     {
         //brazier, hotel, torch
@@ -39,13 +40,13 @@ public class EnemyLurkAroundState : EnemyBaseState
                     if (light.IsLit)
                     {
                         Debug.Log(context.currentRoom.name + ": Brazier is Lit");
-                        lBraziere.isLit = true;
-                        lBraziere.light = light;
+                        lBrazier.isLit = true;
+                        lBrazier.light = light;
                     }
                     else
                     {
-                        lBraziere.isLit = false;
-                        lBraziere.light = light;
+                        lBrazier.isLit = false;
+                        lBrazier.light = light;
                     }
                 }
                 else if (light.GetComponent<Altar>() != null)
@@ -78,35 +79,35 @@ public class EnemyLurkAroundState : EnemyBaseState
                 }
             }
 
-            if (!lBraziere.isLit && !lAltar.isLit && !lTorch.isLit)
+            if (!lBrazier.isLit && !lAltar.isLit && !lTorch.isLit)
             {
                 navMeshAgent.SetDestination(context.transform.position);
             }
             else
             {
-                if (lBraziere.isLit)
+                if (lBrazier.isLit)
                 {
-                    navMeshAgent.SetDestination(lBraziere.light.transform.position);
-                    isChassingTorch = false;
+                    navMeshAgent.SetDestination(lBrazier.light.transform.position);
+                    isChasingTorch = false;
                 }
                 else if (lAltar.isLit)
                 {
                     navMeshAgent.SetDestination(lAltar.light.transform.position);
-                    isChassingTorch = false;
+                    isChasingTorch = false;
                 }
                 else if (lTorch.isLit)
                 {
-                    isChassingTorch = true;
+                    isChasingTorch = true;
                 }
                 else
                 {
-                    isChassingTorch = false;
+                    isChasingTorch = false;
                 }
             }
         }
         else
         {
-            isChassingTorch = false;
+            isChasingTorch = false;
         }
     }
 
@@ -118,11 +119,9 @@ public class EnemyLurkAroundState : EnemyBaseState
     public override void UpdateState(EnemyStateManager context)
     {
         //IsPlayer/LightInRoom
-        if (isChassingTorch)
+        if (isChasingTorch)
         {
             navMeshAgent.SetDestination(lTorch.light.transform.position);
-        }        
+        }
     }
-
-  
 }

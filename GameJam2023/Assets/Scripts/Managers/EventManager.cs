@@ -8,6 +8,7 @@ namespace Utilities
 		NONE = -1,
 		LIGHT_LIT,
 		ANIM_OVER,
+		PLAYER_ATTRACT,
 		START_GAME
 	}
 

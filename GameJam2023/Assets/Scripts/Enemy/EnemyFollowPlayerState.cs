@@ -2,11 +2,11 @@ using UnityEngine.AI;
 using UnityEngine;
 public class EnemyFollowPlayerState : EnemyBaseState
 {
-    Transform playerTransform;
+    Transform torchTransform;
     public EnemyFollowPlayerState(NavMeshAgent navMeshAgent, Transform playerTransform)
     {
         base.navMeshAgent = navMeshAgent;
-        this.playerTransform = playerTransform;
+        this.torchTransform = playerTransform;
     }
 
     public override void EnterState(EnemyStateManager context)
@@ -25,6 +25,6 @@ public class EnemyFollowPlayerState : EnemyBaseState
 
     public override void UpdateState(EnemyStateManager context)
     {
-        navMeshAgent.SetDestination(playerTransform.position);
+        navMeshAgent.SetDestination(torchTransform.GetComponentInChildren<Torch>().transform.position);
     }
 }

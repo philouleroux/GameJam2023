@@ -31,7 +31,16 @@ public class EnemyStateManager : MonoBehaviour
         followPlayerState = new EnemyFollowPlayerState(navMeshAgent, playerTransform);
         lurkAroundState = new EnemyLurkAroundState(navMeshAgent);
         goToLightState = new EnemyGoToLightState(navMeshAgent);
-        EventManager.Subscribe(GameEventType.LIGHT_LIT, ChangeToLurk);        
+        EventManager.Subscribe(GameEventType.LIGHT_LIT, ChangeToLurk);
+        EventManager<RoomObject>.SubscribeParam(GameEventType.PLAYER_ATTRACT, GoToPlayer);
+    }
+
+    private void GoToPlayer(RoomObject playerRoom)
+    {
+        if (currentRoom == playerRoom)
+        {
+            SwitchState(followPlayerState);
+        }
     }
 
     private void Start()
@@ -60,7 +69,6 @@ public class EnemyStateManager : MonoBehaviour
 
     private void ChangeToLurk()
     {
-        Start();
-        Debug.Log("LIGHT_LIT consummed");
+        SwitchState(lurkAroundState);
     }
 }
