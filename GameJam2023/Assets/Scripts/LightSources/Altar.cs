@@ -25,6 +25,8 @@ public class Altar : LightSource
                     ps.Stop();
                 }
                 godBeamParticles.Stop();
+                  EventManager.Publish(GameEventType.HOTEL_LOST);
+
             }
             else if (temp > lightIntensity)
             {
@@ -42,6 +44,7 @@ public class Altar : LightSource
                 GameManager.instance.Player.Animator.ResetTrigger("Prayer");
                 GameManager.instance.Player.Animator.SetTrigger("Idle");
                 godBeamParticles.Play();
+                EventManager.Publish(GameEventType.HOTEL_PRAYED);
             }
         }
     }
@@ -84,7 +87,7 @@ public class Altar : LightSource
         if (animType == "Prayer")
         {
             LightIntensity += maxIntensity * 0.5f;
-            lightObj.intensity = pointLightMaxIntensity;
+            lightObj.intensity = pointLightMaxIntensity;           
         }
     }
 

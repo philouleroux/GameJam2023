@@ -108,7 +108,6 @@ public class LightSource : MonoBehaviour
         //Debug.Log($"Trigger");
         if (other.CompareTag("Enemy"))
         {
-
             enemyInTrigger++;
             Debug.Log($"Tag compared");
             // Enemy enemy = other.GetComponent<Enemy>();

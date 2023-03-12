@@ -6,8 +6,7 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField]
-    RoomObject currentRoom;
+    public RoomObject currentRoom;
     public Torch torch;
     public bool HasTorch { get; set; }
     public Animator Animator { get; private set; }
@@ -19,11 +18,18 @@ public class Player : MonoBehaviour
         GameManager.instance.Player = this;
         HasTorch = true;
         currentRoom.lightSources.Add(torch);
+        InputHandler.Subscribe(KeyAction.LEFT_CLICK, AttractEnemies);
     }
 
-    void Update()
+    private void AttractEnemies(InputAction.CallbackContext c)
     {
-        
+        if (HasTorch)
+        {
+            Animator.SetTrigger("Attract");
+            EventManager<RoomObject>.PublishParam(GameEventType.PLAYER_ATTRACT, currentRoom);
+            InputHandler.Unsubscribe(KeyAction.LEFT_CLICK);
+            StartCoroutine(ChasingCoroutine());
+        }
     }
 
     public void SetRoom (RoomObject p_room) 
@@ -36,34 +42,22 @@ public class Player : MonoBehaviour
         return currentRoom;
     }
 
-    public void ResetWalkAnim()
+    private IEnumerator ChasingCoroutine()
     {
-
-    }
-    
-    public void ResetWalkNoTorchAnim()
-    {
-
-    }
-    
-    public void ResetIdleAnim()
-    {
-
-    }
-    
-    public void ResetAttractAnim()
-    {
-
+        yield return new WaitForSeconds(7f);
+        EventManager.Publish(GameEventType.LIGHT_LIT);
+        InputHandler.Subscribe(KeyAction.LEFT_CLICK, AttractEnemies);
     }
 
     public void ResetPrayerAnim()
     {
+        Animator.SetTrigger("Kneeling");
         EventManager<string>.PublishParam(GameEventType.ANIM_OVER, "Prayer");
     }
 
-    public void ResetBurnAnim()
+    public void ResetKneelingAnim()
     {
-
+        Animator.SetTrigger("Prayer");
     }
     
     public void ResetDropTorchAnim()
