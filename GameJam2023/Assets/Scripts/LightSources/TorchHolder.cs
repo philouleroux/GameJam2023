@@ -40,15 +40,12 @@ public class TorchHolder : MonoBehaviour
         else
         {
             GameManager.instance.Player.HasTorch = true;
-            GameManager.instance.Player.torch.gameObject.SetActive(value: true);
+            GameManager.instance.Player.torch.gameObject.SetActive(true);
             holdingTorch.gameObject.SetActive(false);
             noTorch.gameObject.SetActive(true);
         }
+
         InputHandler.Unsubscribe(KeyAction.INTERACT);
-        if (lastCallback != null)
-        {
-            InputHandler.Subscribe(KeyAction.INTERACT, lastCallback);
-        }
     }
 
     void OnTriggerEnter(Collider other)
