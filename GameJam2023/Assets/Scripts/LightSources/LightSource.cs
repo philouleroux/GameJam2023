@@ -73,7 +73,7 @@ public class LightSource : MonoBehaviour
         lightIntensity = maxIntensity;
         lightObj.intensity = pointLightMaxIntensity;       
         EventManager.Publish(GameEventType.LIGHT_LIT);
-        Debug.Log("LIGHT_LIT published");
+        //Debug.Log("LIGHT_LIT published");
     }
 
     protected virtual void Activate(InputAction.CallbackContext c)
@@ -83,7 +83,7 @@ public class LightSource : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"Trigger");
+        //Debug.Log($"Trigger");
         if (other.CompareTag("Enemy"))
         {
             enemyInTrigger++;
