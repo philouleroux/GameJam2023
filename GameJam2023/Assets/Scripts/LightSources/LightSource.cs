@@ -106,9 +106,12 @@ public class LightSource : MonoBehaviour
     protected virtual void OnTriggerEnter(Collider other)
     {
         //Debug.Log($"Trigger");
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy") && IsLit)
         {
+
             enemyInTrigger++;
+            var enemy = other.GetComponent<EnemyStateManager>();
+            enemy.SwitchState(enemy.attackLightState);
             Debug.Log($"Tag compared");
             // Enemy enemy = other.GetComponent<Enemy>();
             // enemy.Brain.CurrentState = enemy.Brain.SiphoningState;
@@ -117,9 +120,11 @@ public class LightSource : MonoBehaviour
 
     protected virtual void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy") && IsLit)
         {
             enemyInTrigger--;
+            var enemy = other.GetComponent<EnemyStateManager>();
+            enemy.SwitchState(enemy.lurkAroundState );
         }
     }
 }

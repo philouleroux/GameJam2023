@@ -109,6 +109,16 @@ public class EnemyLurkAroundState : EnemyBaseState
         {
             isChasingTorch = false;
         }
+
+        if (isChasingTorch)
+        {
+            navMeshAgent.isStopped = false;
+        }
+        else
+        {
+            context.anim.SetTrigger("attackLightState");
+            navMeshAgent.velocity = Vector3.zero;
+        }
     }
 
     public override void OnCollision(EnemyStateManager context, Collision collision)
@@ -119,6 +129,12 @@ public class EnemyLurkAroundState : EnemyBaseState
     public override void UpdateState(EnemyStateManager context)
     {
         //IsPlayer/LightInRoom
+        //if (navMeshAgent.remainingDistance <= 1f && !navMeshAgent.isStopped)
+        //{
+        //    navMeshAgent.isStopped = true;
+        //    isChasingTorch = false;
+        //}
+
         if (isChasingTorch)
         {
             navMeshAgent.SetDestination(lTorch.light.transform.position);

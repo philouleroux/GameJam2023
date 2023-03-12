@@ -11,7 +11,9 @@ public class EnemyAttackLightState : EnemyBaseState
     public override void EnterState(EnemyStateManager context)
     {
         //Stop
-        navMeshAgent.SetDestination(context.transform.position);
+        //navMeshAgent.SetDestination(context.transform.position);
+        navMeshAgent.isStopped = true;
+        context.anim.SetTrigger("attackLightState");
     }
 
     public override void OnCollision(EnemyStateManager context, Collision collision)
