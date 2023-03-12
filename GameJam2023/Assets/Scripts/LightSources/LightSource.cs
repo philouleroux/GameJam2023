@@ -14,10 +14,10 @@ public class LightSource : MonoBehaviour
     protected float lightIntensity;
 
     protected System.Action<InputAction.CallbackContext> lastCallback;
-    public float LightIntensity
+    public virtual float LightIntensity
     {
         get { return lightIntensity; }
-        private set
+        set
         { 
             lightIntensity = value;
 
@@ -39,9 +39,9 @@ public class LightSource : MonoBehaviour
             }
         }
     }
-    private ParticleSystem particles;
-    private Light lightObj;
-    public bool IsLit { get; private set; }
+    protected ParticleSystem particles;
+    protected Light lightObj;
+    public bool IsLit { get; set; }
     protected int enemyInTrigger;
 
     protected virtual void Awake()
@@ -62,7 +62,7 @@ public class LightSource : MonoBehaviour
         if (enemyInTrigger > 0 && IsLit)
         {
             LightIntensity -= (enemyInTrigger * speedDecreasingIntensity* Time.deltaTime);
-            Debug.Log($"Light intensity = {LightIntensity}");
+            //Debug.Log($"Light intensity = {LightIntensity}");
         }
     }
 
