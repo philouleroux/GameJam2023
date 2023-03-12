@@ -42,6 +42,11 @@ public class EnemyLurkAroundState : EnemyBaseState
                         lBraziere.isLit = true;
                         lBraziere.light = light;
                     }
+                    else
+                    {
+                        lBraziere.isLit = false;
+                        lBraziere.light = light;
+                    }
                 }
                 else if (light.GetComponent<Altar>() != null)
                 {
@@ -51,6 +56,11 @@ public class EnemyLurkAroundState : EnemyBaseState
                         lAltar.isLit = true;
                         lAltar.light = light;
                     }
+                    else
+                    {
+                        lAltar.isLit = false;
+                        lAltar.light = light;
+                    }
                 }
                 else if (light.GetComponent<Torch>() != null)
                 {
@@ -58,6 +68,11 @@ public class EnemyLurkAroundState : EnemyBaseState
                     {
                         Debug.Log(context.currentRoom.name + ": Torch is Lit");
                         lTorch.isLit = true;
+                        lTorch.light = light;
+                    }
+                    else
+                    {
+                        lTorch.isLit = false;
                         lTorch.light = light;
                     }
                 }

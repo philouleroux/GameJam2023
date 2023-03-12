@@ -63,6 +63,11 @@ public class LightSource : MonoBehaviour
         if (enemyInTrigger > 0 && IsLit)
         {
             LightIntensity -= (enemyInTrigger * speedDecreasingIntensity* Time.deltaTime);
+            if (LightIntensity <= 0.0f)
+            {
+                IsLit = false;
+                EventManager.Publish(GameEventType.LIGHT_LIT);                
+            }
             //Debug.Log($"Light intensity = {LightIntensity}");
         }
     }
@@ -81,12 +86,13 @@ public class LightSource : MonoBehaviour
     {
         Activate();
     }
-
+    
     protected virtual void OnTriggerEnter(Collider other)
     {
         //Debug.Log($"Trigger");
         if (other.CompareTag("Enemy"))
         {
+
             enemyInTrigger++;
             Debug.Log($"Tag compared");
             // Enemy enemy = other.GetComponent<Enemy>();
