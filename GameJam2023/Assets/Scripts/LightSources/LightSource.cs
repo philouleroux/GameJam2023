@@ -42,6 +42,7 @@ public class LightSource : MonoBehaviour
     protected ParticleSystem particles;
     protected Light lightObj;
     public bool IsLit { get; set; }
+
     protected int enemyInTrigger;
 
     protected virtual void Awake()
@@ -94,8 +95,14 @@ public class LightSource : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
-            lastCallback = InputHandler.Unsubscribe(KeyAction.INTERACT);
-            InputHandler.Subscribe(KeyAction.INTERACT, Activate);
+            if (other.GetComponent<Player>().HasTorch)
+            {
+                if (lastCallback != null)
+                {
+                    lastCallback = InputHandler.Unsubscribe(KeyAction.INTERACT);
+                }
+                InputHandler.Subscribe(KeyAction.INTERACT, Activate);
+            }
         }
     }
 
@@ -109,7 +116,10 @@ public class LightSource : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             InputHandler.Unsubscribe(KeyAction.INTERACT);
-            InputHandler.Subscribe(KeyAction.INTERACT, lastCallback);
+            if (lastCallback != null)
+            {
+                InputHandler.Subscribe(KeyAction.INTERACT, lastCallback);
+            }
         }
     }
 }

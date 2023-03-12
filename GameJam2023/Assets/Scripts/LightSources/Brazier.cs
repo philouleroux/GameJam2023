@@ -5,25 +5,27 @@ using UnityEngine;
 
 public class Brazier : LightSource
 {
+    private Player player;
+    private void Start()
+    {
+        player = GameManager.instance.Player;
+    }
+
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-
-        if (other.CompareTag("Player"))
+        if(!player.HasTorch)
         {
-            lastCallback = InputHandler.Unsubscribe(KeyAction.INTERACT);
-            InputHandler.Subscribe(KeyAction.INTERACT, Activate);
+            player.GetComponent<Grab>().Subscribe();
         }
     }
 
     protected override void OnTriggerExit(Collider other)
     {
         base.OnTriggerExit(other);
-
-        if (other.CompareTag("Player"))
+        if (!player.HasTorch)
         {
-            InputHandler.Unsubscribe(KeyAction.INTERACT);
-            InputHandler.Subscribe(KeyAction.INTERACT, lastCallback);
+            player.GetComponent<Grab>().Unsubscribe();
         }
     }
 }

@@ -27,7 +27,10 @@ public class Altar : LightSource
 
         if (other.CompareTag("Player"))
         {
-            lastCallback = InputHandler.Unsubscribe(KeyAction.INTERACT);
+            if (lastCallback != null)
+            {
+                lastCallback = InputHandler.Unsubscribe(KeyAction.INTERACT);
+            }
             InputHandler.Subscribe(KeyAction.INTERACT, Activate);
         }
     }
@@ -39,7 +42,10 @@ public class Altar : LightSource
         if (other.CompareTag("Player"))
         {
             InputHandler.Unsubscribe(KeyAction.INTERACT);
-            InputHandler.Subscribe(KeyAction.INTERACT, lastCallback);
+            if (lastCallback != null)
+            {
+                InputHandler.Subscribe(KeyAction.INTERACT, lastCallback);
+            }
         }
     }
 }

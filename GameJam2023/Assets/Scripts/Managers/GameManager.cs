@@ -6,11 +6,11 @@ using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public Player player { get; private set; }
+    public Player Player { get; set; }
 
-    void Start()
+    void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }

@@ -35,6 +35,7 @@ public class Torch : LightSource
     [SerializeField]
     Slider slider;
 
+
     [SerializeField] 
     float lerpSpeed = 1f;
 

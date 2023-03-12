@@ -33,10 +33,8 @@ public class PlayerMouvement : MonoBehaviour
         Vector3 direction = moveInput.ReadValue<Vector2>().normalized;
         direction.z = direction.y;
         direction.y = 0f;
-        //transform.position += direction * speed * Time.deltaTime;
-        //rb.AddForce(transform.position += direction * speed * Time.deltaTime);
-        //transform.RotateAround(transform.position, transform.up, Mathf.Asin(direction.x - transform.forward.x));
-        transform.LookAt(Vector3.Lerp(transform.forward, transform.position + direction * speed, 1f));
+
+        transform.LookAt(transform.position + direction * speed);
         rb.velocity = direction * speed;
     }
 }
