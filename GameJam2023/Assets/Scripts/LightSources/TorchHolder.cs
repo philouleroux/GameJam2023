@@ -9,6 +9,7 @@ public class TorchHolder : MonoBehaviour
 {
     HoldingTorch holdingTorch;
     NoTorch noTorch;
+    public RoomObject room;
 
     protected System.Action<InputAction.CallbackContext> lastCallback;
 
@@ -37,7 +38,7 @@ public class TorchHolder : MonoBehaviour
 
     private void SetTorchHolderState(string animType)
     {
-        if (animType.Equals("DropTorch"))
+        if (animType.Equals("DropTorch") && room == GameManager.instance.Player.currentRoom)
         {
             GameManager.instance.Player.torch.gameObject.SetActive(false);
             holdingTorch.gameObject.SetActive(true);

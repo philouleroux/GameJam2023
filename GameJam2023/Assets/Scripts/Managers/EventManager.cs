@@ -9,6 +9,9 @@ namespace Utilities
 		LIGHT_LIT,
 		ANIM_OVER,
 		PLAYER_ATTRACT,
+		UPDATED_UI_POINT,
+		HOTEL_PRAYED,
+		HOTEL_LOST,
 		START_GAME
 	}
 
