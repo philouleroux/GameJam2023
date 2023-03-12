@@ -6,8 +6,7 @@ using UnityEngine.UI;
 
 public class Torch : LightSource
 {
-    [SerializeField]
-    Slider slider;
+    [SerializeField] Slider slider;
 
     [SerializeField] 
     float lerpSpeed = 1f;

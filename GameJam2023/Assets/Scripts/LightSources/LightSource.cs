@@ -14,7 +14,7 @@ public class LightSource : MonoBehaviour
     protected float lightIntensity;
 
     protected System.Action<InputAction.CallbackContext> lastCallback;
-    public float LightIntensity
+    public virtual float LightIntensity
     {
         get { return lightIntensity; }
         private set
