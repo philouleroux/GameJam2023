@@ -78,6 +78,7 @@ public static class InputHandler
 
         callbacks[key].callback = callbackMethod;
         callbacks[key].action.canceled += callbackMethod;
+
     }
 
     public static Action<InputAction.CallbackContext> Unsubscribe(KeyAction key)
@@ -87,6 +88,8 @@ public static class InputHandler
         {
             callback = callbacks[key].callback;
             callbacks[key].action.performed -= callbacks[key].callback;
+            //callbacks[key].action.canceled -= callbacks[key].callback;
+            //callbacks[key].action.started -= callbacks[key].callback;
             callbacks[key].callback = null;
         }
 

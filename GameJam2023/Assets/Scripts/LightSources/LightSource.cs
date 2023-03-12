@@ -41,7 +41,7 @@ public class LightSource : MonoBehaviour
     }
     private ParticleSystem particles;
     private Light lightObj;
-    public bool IsLit { get; private set; }
+    public bool IsLit { get; protected set; }
     protected int enemyInTrigger;
 
     protected virtual void Awake()

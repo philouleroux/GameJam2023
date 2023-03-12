@@ -31,8 +31,7 @@ public class EnemyStateManager : MonoBehaviour
         followPlayerState = new EnemyFollowPlayerState(navMeshAgent, playerTransform);
         lurkAroundState = new EnemyLurkAroundState(navMeshAgent);
         goToLightState = new EnemyGoToLightState(navMeshAgent);
-        EventManager.Subscribe(GameEventType.LIGHT_LIT, ChangeToLurk);
-        
+        EventManager.Subscribe(GameEventType.LIGHT_LIT, ChangeToLurk);        
     }
 
     private void Start()
