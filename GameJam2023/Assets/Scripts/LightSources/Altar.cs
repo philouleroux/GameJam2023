@@ -12,7 +12,7 @@ public class Altar : LightSource
     public override float LightIntensity
     {
         get { return lightIntensity; }
-        protected set
+        set
         {
             var temp = lightIntensity;
             lightIntensity = value;
