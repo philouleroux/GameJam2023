@@ -62,7 +62,7 @@ public class LightSource : MonoBehaviour
     {
         if (enemyInTrigger > 0 && IsLit)
         {
-           LightIntensity -= (enemyInTrigdwsger * speedDecreasingIntensity* Time.deltaTime);
+            LightIntensity -= (enemyInTrigger * speedDecreasingIntensity* Time.deltaTime);
             if (LightIntensity <= 0.0f)
             {
                 IsLit = false;
