@@ -11,8 +11,7 @@ namespace Utilities
 		HOTEL_PRAYED,
 		UPDATED_UI_POINT,
         HOTEL_LOST,
-        START_GAME,
-		PLAYER_ATTRACT
+        START_GAME
 	}
 
 	public static class EventManager

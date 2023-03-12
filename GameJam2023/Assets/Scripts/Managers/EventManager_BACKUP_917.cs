@@ -8,11 +8,15 @@ namespace Utilities
 		NONE = -1,
 		LIGHT_LIT,
 		ANIM_OVER,
+<<<<<<< HEAD
 		HOTEL_PRAYED,
 		UPDATED_UI_POINT,
         HOTEL_LOST,
-        START_GAME,
-		PLAYER_ATTRACT
+        START_GAME
+=======
+		PLAYER_ATTRACT,
+		START_GAME
+>>>>>>> b9f621bed8ef3289786944181ead7bebdacf5503
 	}
 
 	public static class EventManager
