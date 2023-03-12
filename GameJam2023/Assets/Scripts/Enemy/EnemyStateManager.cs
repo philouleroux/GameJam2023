@@ -19,7 +19,7 @@ public class EnemyStateManager : MonoBehaviour
 
     private NavMeshAgent navMeshAgent;
 
-    public Transform transformLight;
+    //public Transform transformLight;
 
     [SerializeField] Transform playerTransform;
 
