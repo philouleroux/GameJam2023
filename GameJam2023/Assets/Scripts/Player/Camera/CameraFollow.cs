@@ -7,10 +7,10 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] Transform playerTransform;
     [SerializeField] float lerpSpeed;
 
-    void LateUpdate()
+    void Update()
     {
-        //transform.position = Vector3.Lerp(transform.position, playerTransform.position, lerpSpeed * Time.deltaTime);
-        transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, lerpSpeed * Time.deltaTime);
-
+        transform.position = Vector3.Slerp(transform.position, playerTransform.position, lerpSpeed * Time.deltaTime);
+        //transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, lerpSpeed * Time.deltaTime);
+        //transform.position = playerTransform.position;
     }
 }
