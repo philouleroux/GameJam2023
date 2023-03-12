@@ -67,19 +67,35 @@ public class LightSource : MonoBehaviour
         }
     }
 
-    protected virtual void Activate()
+    protected virtual void OnEnable()
     {
-        IsLit = true;
-        particles.Play();
-        lightIntensity = maxIntensity;
-        lightObj.intensity = pointLightMaxIntensity;       
-        EventManager.Publish(GameEventType.LIGHT_LIT);
+    }
+
+    protected virtual void OnDisable()
+    {
+    }
+
+    protected virtual void Activate(string animType)
+    {
+        if (animType == "LightBrazier")
+        {
+            IsLit = true;
+            particles.Play();
+            lightIntensity = maxIntensity;
+            lightObj.intensity = pointLightMaxIntensity;       
+            EventManager.Publish(GameEventType.LIGHT_LIT);
+        }
         //Debug.Log("LIGHT_LIT published");
+    }
+
+    protected void SetFire()
+    {
+        GameManager.instance.Player.Animator.SetTrigger("LightBrazier");
     }
 
     protected virtual void Activate(InputAction.CallbackContext c)
     {
-        Activate();
+        SetFire();
     }
 
     protected virtual void OnTriggerEnter(Collider other)
@@ -92,18 +108,6 @@ public class LightSource : MonoBehaviour
             // Enemy enemy = other.GetComponent<Enemy>();
             // enemy.Brain.CurrentState = enemy.Brain.SiphoningState;
         }
-
-        if (other.CompareTag("Player"))
-        {
-            if (other.GetComponent<Player>().HasTorch)
-            {
-                if (lastCallback != null)
-                {
-                    lastCallback = InputHandler.Unsubscribe(KeyAction.INTERACT);
-                }
-                InputHandler.Subscribe(KeyAction.INTERACT, Activate);
-            }
-        }
     }
 
     protected virtual void OnTriggerExit(Collider other)
@@ -111,15 +115,6 @@ public class LightSource : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             enemyInTrigger--;
-        }
-
-        if (other.CompareTag("Player"))
-        {
-            InputHandler.Unsubscribe(KeyAction.INTERACT);
-            if (lastCallback != null)
-            {
-                InputHandler.Subscribe(KeyAction.INTERACT, lastCallback);
-            }
         }
     }
 }

@@ -60,7 +60,7 @@ public class Torch : LightSource
     public void Start()
     {
         base.Awake();
-        Activate();
+        Activate("LightBrazier");
     }
 
     protected override void Update()

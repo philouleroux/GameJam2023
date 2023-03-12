@@ -29,7 +29,6 @@ public class Grab : MonoBehaviour
 
     private void StartGrab(InputAction.CallbackContext obj)
     {
-        Debug.Log("Grab");
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, float.MaxValue, layerMaskGrabbable))
         {
@@ -37,13 +36,15 @@ public class Grab : MonoBehaviour
 
             grabbableObject = hit.transform;
             Brazier source = grabbableObject.GetComponentInChildren<Brazier>();
-            if (source != null && !source.IsLit)
+            if (!source.IsLit)
             {
+                GetComponent<Player>().IsGrabbing = true;
                 grabbableObject.transform.SetParent(transform);
             }
             else
             {
                 // repousse le joueur?
+                GetComponent<Player>().Animator.SetTrigger("Burn");
             }
         }
     }
@@ -52,7 +53,8 @@ public class Grab : MonoBehaviour
     {
         if (grabbableObject != null)
         {
-            Debug.Log("NoGrab");
+            GetComponent<Player>().IsGrabbing = false;
+            GetComponent<Player>().Animator.SetTrigger("Idle");
             grabbableObject.transform.SetParent(null);
             grabbableObject = null;
             Unsubscribe();
