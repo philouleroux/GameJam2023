@@ -61,6 +61,6 @@ public class EnemyStateManager : MonoBehaviour
     private void ChangeToLurk()
     {
         Start();
-        //Debug.Log("LIGHT_LIT consummed");
+        Debug.Log("LIGHT_LIT consummed");
     }
 }
