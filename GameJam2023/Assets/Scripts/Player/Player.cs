@@ -8,7 +8,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     RoomObject currentRoom;
     public Torch torch;
-    public bool HasTorch { get; set; }  
+    public bool HasTorch { get; set; }
+    public Animator Animator { get; private set; }
 
     void OnEnable()
     {

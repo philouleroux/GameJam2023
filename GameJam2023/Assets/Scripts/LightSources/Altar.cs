@@ -1,24 +1,95 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using Utilities;
 
 public class Altar : LightSource
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private ParticleSystem[] candlesParticles;
+    [SerializeField] private ParticleSystem godBeamParticles;
+
+    public override float LightIntensity
     {
-        
+        get { return lightIntensity; }
+        protected set
+        {
+            var temp = lightIntensity;
+            lightIntensity = value;
+
+            if (lightIntensity <= 0.0f)
+            {
+                IsLit = false;
+                foreach (ParticleSystem ps in candlesParticles)
+                {
+                    ps.Stop();
+                }
+                godBeamParticles.Stop();
+            }
+            else if (temp > lightIntensity)
+            {
+                float percentage = lightIntensity / maxIntensity;
+                var tempEmission = particles.main;
+                tempEmission.startColor = new Color(
+                    tempEmission.startColor.color.r,
+                    tempEmission.startColor.color.g,
+                    tempEmission.startColor.color.b,
+                    temp);
+                lightObj.intensity = pointLightMaxIntensity * percentage;
+            }
+            else if (lightIntensity >= maxIntensity)
+            {
+                godBeamParticles.Play();
+            }
+        }
     }
 
     protected override void Awake()
     {
-        
+        foreach (ParticleSystem ps in candlesParticles)
+        {
+            ps.Stop();
+        }
+
+        godBeamParticles.Stop();
+
+        lightObj = GetComponentInChildren<Light>();
+        lightObj.intensity = 0f;
+
+        IsLit = false;
+        lightIntensity = 0.0f;
+        //Activate();
     }
 
-    // Update is called once per frame
     protected override void Update()
     {
         base.Update();
+    }
+
+    protected override void Activate()
+    {
+        IsLit = true;
+        foreach (ParticleSystem ps in candlesParticles)
+        {
+            ps.Play();
+        }
+
+        EventManager.Publish(GameEventType.LIGHT_LIT);
+    }
+
+    protected override void Activate(InputAction.CallbackContext c)
+    {
+        Activate();
+    }
+
+    private void Pray(InputAction.CallbackContext c)
+    {
+        //GameManager.instance.Player.Animator.SetTrigger("Pray");
+
+        // Change this
+
+        LightIntensity = maxIntensity;
+        lightObj.intensity = pointLightMaxIntensity;
     }
 
     protected override void OnTriggerEnter(Collider other)
@@ -27,11 +98,16 @@ public class Altar : LightSource
 
         if (other.CompareTag("Player"))
         {
-            if (lastCallback != null)
+            if (!IsLit && other.GetComponent<Player>().HasTorch)
             {
-                lastCallback = InputHandler.Unsubscribe(KeyAction.INTERACT);
+                InputHandler.Unsubscribe(KeyAction.INTERACT);
+                InputHandler.Subscribe(KeyAction.INTERACT, Activate);
             }
-            InputHandler.Subscribe(KeyAction.INTERACT, Activate);
+            else if (IsLit && !other.GetComponent<Player>().HasTorch)
+            {
+                InputHandler.Unsubscribe(KeyAction.INTERACT);
+                InputHandler.Subscribe(KeyAction.INTERACT, Pray);
+            }
         }
     }
 
@@ -42,10 +118,6 @@ public class Altar : LightSource
         if (other.CompareTag("Player"))
         {
             InputHandler.Unsubscribe(KeyAction.INTERACT);
-            if (lastCallback != null)
-            {
-                InputHandler.Subscribe(KeyAction.INTERACT, lastCallback);
-            }
         }
     }
 }

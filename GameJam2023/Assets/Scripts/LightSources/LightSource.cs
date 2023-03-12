@@ -17,7 +17,7 @@ public class LightSource : MonoBehaviour
     public virtual float LightIntensity
     {
         get { return lightIntensity; }
-        private set
+        protected set
         { 
             lightIntensity = value;
 
@@ -39,8 +39,8 @@ public class LightSource : MonoBehaviour
             }
         }
     }
-    private ParticleSystem particles;
-    private Light lightObj;
+    protected ParticleSystem particles;
+    protected Light lightObj;
     public bool IsLit { get; protected set; }
     protected int enemyInTrigger;
 
