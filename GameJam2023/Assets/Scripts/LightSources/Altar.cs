@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Utilities;
@@ -8,6 +9,8 @@ public class Altar : LightSource
 {
     [SerializeField] private ParticleSystem[] candlesParticles;
     [SerializeField] private ParticleSystem godBeamParticles;
+
+    bool isPrayed = false;
 
     public override float LightIntensity
     {
@@ -25,6 +28,11 @@ public class Altar : LightSource
                     ps.Stop();
                 }
                 godBeamParticles.Stop();
+                if (isPrayed)
+                {
+                    isPrayed = false;
+                    EventManager.Publish(GameEventType.HOTEL_LOST);
+                }                
             }
             else if (temp > lightIntensity)
             {
@@ -41,6 +49,8 @@ public class Altar : LightSource
             {
                 GameManager.instance.Player.Animator.ResetTrigger("Prayer");
                 GameManager.instance.Player.Animator.SetTrigger("Idle");
+                EventManager.Publish(GameEventType.HOTEL_PRAYED);
+                isPrayed = true;
                 godBeamParticles.Play();
             }
         }
@@ -85,6 +95,7 @@ public class Altar : LightSource
         {
             LightIntensity += maxIntensity * 0.5f;
             lightObj.intensity = pointLightMaxIntensity;
+            
         }
     }
 

@@ -37,5 +37,27 @@ public class RoomChange : MonoBehaviour
                 }
             }
         }
+        else if (other.CompareTag("Brazier"))
+        {
+            Brazier brazier = other.GetComponent<Brazier>();
+            //Brazier temp = (Brazier)other;
+            Debug.Log("Brazier triggered");
+            if (player.GetRoom() != newRoom)
+            {
+                ///retire le brazier de la piece précédeante
+                if (player.GetRoom().lightSources.Contains(brazier))
+                {
+                    player.GetRoom().lightSources.Remove(brazier);
+                }
+
+                //ajouter le brazier dans la nouvelle piece
+                player.SetRoom(newRoom);
+                if (!newRoom.lightSources.Contains(brazier))
+                {
+                    newRoom.lightSources.Add(brazier);
+                    EventManager.Publish(GameEventType.LIGHT_LIT);
+                }
+            }
+        }
     }
 }
