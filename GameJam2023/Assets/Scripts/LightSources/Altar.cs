@@ -83,6 +83,7 @@ public class Altar : LightSource
         if (animType == "LightBrazier")
         {
             IsLit = true;
+            lightObj.intensity = pointLightMaxIntensity;
             foreach (ParticleSystem ps in candlesParticles)
             {
                 ps.Play();
@@ -106,6 +107,8 @@ public class Altar : LightSource
 
     private void Pray(InputAction.CallbackContext c)
     {
+        EventManager.Publish(GameEventType.PRAYING);
+        GameManager.instance.Player.IsPraying = true;
         GameManager.instance.Player.Animator.SetTrigger("Kneeling");
     }
 
@@ -138,6 +141,7 @@ public class Altar : LightSource
         {
             EventManager<string>.UnsubscribeParam(GameEventType.ANIM_OVER, Activate);
             InputHandler.Unsubscribe(KeyAction.INTERACT);
+            other.GetComponent<Player>().IsPraying = false;
         }
     }
 }

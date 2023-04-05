@@ -24,11 +24,11 @@ public class DisplayPoint : MonoBehaviour
     {
         if (GameManager.instance.gamePoint >= index)
         {            
-            this.GetComponent<RawImage>().enabled = true;
+            this.GetComponent<Image>().enabled = true;
         }
         else
         {
-            this.GetComponent<RawImage>().enabled = false;
+            this.GetComponent<Image>().enabled = false;
         }
     }
 

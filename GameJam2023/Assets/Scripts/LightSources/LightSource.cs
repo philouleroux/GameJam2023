@@ -24,6 +24,7 @@ public class LightSource : MonoBehaviour
             {
                 IsLit = false;
                 particles.Stop();
+                EventManager.Publish(GameEventType.LIGHT_LIT);
             }
             else
             {
@@ -62,12 +63,6 @@ public class LightSource : MonoBehaviour
         if (enemyInTrigger > 0 && IsLit)
         {
             LightIntensity -= (enemyInTrigger * speedDecreasingIntensity* Time.deltaTime);
-            if (LightIntensity <= 0.0f)
-            {
-                IsLit = false;
-                EventManager.Publish(GameEventType.LIGHT_LIT);                
-            }
-            //Debug.Log($"Light intensity = {LightIntensity}");
         }
     }
 

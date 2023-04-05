@@ -12,6 +12,7 @@ namespace Utilities
 		UPDATED_UI_POINT,
 		HOTEL_PRAYED,
 		HOTEL_LOST,
+		PRAYING,
 		START_GAME
 	}
 

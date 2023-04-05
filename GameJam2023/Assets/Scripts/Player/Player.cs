@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public bool HasTorch { get; set; }
     public Animator Animator { get; private set; }
     public bool IsGrabbing { get; set; }
+    public bool IsPraying { get; set; }
 
     void Start()
     {

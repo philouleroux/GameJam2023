@@ -55,7 +55,7 @@ public static class InputHandler
         }
 
         callbacks[key].callback = callbackMethod;
-        callbacks[key].action.performed += callbackMethod;
+        callbacks[key].action.started += callbackMethod;
     }
 
     public static void SubscribeToStart(KeyAction key, Action<InputAction.CallbackContext> callbackMethod)
@@ -87,7 +87,7 @@ public static class InputHandler
         if (IsPaired(key))
         {
             callback = callbacks[key].callback;
-            callbacks[key].action.performed -= callbacks[key].callback;
+            callbacks[key].action.started -= callbacks[key].callback;
             callbacks[key].callback = null;
         }
 

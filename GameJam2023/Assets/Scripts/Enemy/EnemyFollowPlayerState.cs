@@ -12,6 +12,7 @@ public class EnemyFollowPlayerState : EnemyBaseState
     public override void EnterState(EnemyStateManager context)
     {
         //Something need to happen here?
+        navMeshAgent.isStopped = false;
     }
 
     public override void OnCollision(EnemyStateManager context, Collision collision)
