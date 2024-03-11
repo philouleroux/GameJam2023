@@ -17,13 +17,13 @@ public class Grab : MonoBehaviour
 
     public void Subscribe()
     {
-        InputHandler.Subscribe(KeyAction.INTERACT, StartGrab);
+        InputHandler.SubscribeToStart(KeyAction.INTERACT, StartGrab);
         InputHandler.SubscribeToCancel(KeyAction.INTERACT, StopGrab);
     }
 
     public void Unsubscribe()
     {
-        InputHandler.Unsubscribe(KeyAction.INTERACT);
+        InputHandler.UnsubscribeStarted(KeyAction.INTERACT);
         InputHandler.UnsubscribeCanceled(KeyAction.INTERACT);
     }
 
